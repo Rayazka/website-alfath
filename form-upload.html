@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Upload Artikel LDK Al-Fath</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html">
+                <img src="assets/logo-alfath-merah.png" alt="Logo LDK Al-Fath Telkom University" width="150">
+            </a>
+            <ul>
+                <li><a href="index.html">Ke Beranda Client</a></li>
+                <li><a href="admin-upload.html">Upload Artikel</a></li>
+            </ul>
+        </nav>
+        <h1>Panel Admin - LDK Al-Fath</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Form Tambah Artikel Baru</h2>
+            <form action="#" method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="judul">Judul Artikel:</label><br>
+                    <input type="text" id="judul" name="judul" required>
+                </div>
+                <br>
+                <div>
+                    <label for="kategori">Kategori Artikel:</label><br>
+                    <select id="kategori" name="kategori" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="kajian">Kajian Islam</option>
+                        <option value="kegiatan">Berita Kegiatan</option>
+                        <option value="opini">Opini & Edukasi</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="gambar">Upload Gambar Sampul:</label><br>
+                    <input type="file" id="gambar" name="gambar" accept="image/*" required>
+                </div>
+                <br>
+                <div>
+                    <label for="isi">Isi Artikel:</label><br>
+                    <textarea id="isi" name="isi" rows="8" cols="50" required></textarea>
+                </div>
+                <br>
+                <button type="submit">Upload Artikel</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Daftar Artikel Terdaftar (Kelola Data)</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Judul</th>
+                        <th>Kategori</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Kajian Rutin Pekanan Mahasiswa</td>
+                        <td>Kajian</td>
+                        <td><a href="#">Edit</a> | <a href="#">Hapus</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Admin Panel LDK Al-Fath Telkom University.</p>
+    </footer>
+
+</body>
+</html>
