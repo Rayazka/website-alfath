@@ -4,33 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Upload Artikel LDK Al-Fath</title>
+    <link rel="stylesheet" href="style/form-upload.css">
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="index.html">
-                <img src="assets/logo-alfath-merah.png" alt="Logo LDK Al-Fath Telkom University" width="150">
-            </a>
-            <ul>
-                <li><a href="index.html">Ke Beranda Client</a></li>
-                <li><a href="admin-upload.html">Upload Artikel</a></li>
-            </ul>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a class="brand" href="index.html">
+                    <img src="assets/logo-alfath-merah.png" alt="Logo LDK Al-Fath Telkom University" width="150">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Ke Beranda Client</a></li>
+                    <li><a href="form-upload.html" class="active">Upload Artikel</a></li>
+                </ul>
+            </div>
         </nav>
-        <h1>Panel Admin - LDK Al-Fath</h1>
+        <div class="page-hero">
+            <h1>Panel Admin - LDK Al-Fath</h1>
+            <p>Kelola artikel & berita kegiatan kampus</p>
+        </div>
     </header>
 
-    <main>
-        <section>
-            <h2>Form Tambah Artikel Baru</h2>
+    <main class="container">
+        <section class="panel">
+            <div class="panel-header">
+                <span class="section-label">Konten Baru</span>
+                <h2>Form Tambah Artikel Baru</h2>
+            </div>
             <form action="#" method="post" enctype="multipart/form-data">
-                <div>
-                    <label for="judul">Judul Artikel:</label><br>
-                    <input type="text" id="judul" name="judul" required>
+                <div class="form-group">
+                    <label for="judul">Judul Artikel:</label>
+                    <input type="text" id="judul" name="judul" placeholder="Contoh: Kajian Rutin Pekanan Mahasiswa" required>
                 </div>
-                <br>
-                <div>
-                    <label for="kategori">Kategori Artikel:</label><br>
+                <div class="form-group">
+                    <label for="kategori">Kategori Artikel:</label>
                     <select id="kategori" name="kategori" required>
                         <option value="">-- Pilih Kategori --</option>
                         <option value="kajian">Kajian Islam</option>
@@ -38,45 +46,48 @@
                         <option value="opini">Opini & Edukasi</option>
                     </select>
                 </div>
-                <br>
-                <div>
-                    <label for="gambar">Upload Gambar Sampul:</label><br>
+                <div class="form-group">
+                    <label for="gambar">Upload Gambar Sampul:</label>
                     <input type="file" id="gambar" name="gambar" accept="image/*" required>
                 </div>
-                <br>
-                <div>
-                    <label for="isi">Isi Artikel:</label><br>
-                    <textarea id="isi" name="isi" rows="8" cols="50" required></textarea>
+                <div class="form-group">
+                    <label for="isi">Isi Artikel:</label>
+                    <textarea id="isi" name="isi" rows="8" cols="50" placeholder="Tulis isi artikel di sini..." required></textarea>
                 </div>
-                <br>
-                <button type="submit">Upload Artikel</button>
+                <button class="btn-submit" type="submit">Upload Artikel</button>
             </form>
         </section>
 
-        <section>
-            <h2>Daftar Artikel Terdaftar (Kelola Data)</h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Judul</th>
-                        <th>Kategori</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Kajian Rutin Pekanan Mahasiswa</td>
-                        <td>Kajian</td>
-                        <td><a href="#">Edit</a> | <a href="#">Hapus</a></td>
-                    </tr>
-                </tbody>
-            </table>
+        <section class="panel">
+            <div class="panel-header">
+                <span class="section-label">Kelola Data</span>
+                <h2>Daftar Artikel Terdaftar (Kelola Data)</h2>
+            </div>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Judul</th>
+                            <th>Kategori</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Kajian Rutin Pekanan Mahasiswa</td>
+                            <td><span class="badge">Kajian</span></td>
+                            <td><a class="action-edit" href="#">Edit</a> | <a class="action-delete" href="#">Hapus</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="site-footer">
+        <div class="footer-line"></div>
         <p>&copy; 2026 Admin Panel LDK Al-Fath Telkom University.</p>
     </footer>
 

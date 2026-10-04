@@ -4,45 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LDK Al-Fath Telkom University - Landing Page</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="index.html">
-                <img src="assets/logo-alfath-merah.png" alt="Logo LDK Al-Fath Telkom University" width="150">
-            </a>
-            <ul>
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="detail-artikel.html">Artikel Terbaru</a></li>
-                <li><a href="admin-upload.html">Portal Admin</a></li>
-            </ul>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a class="brand" href="index.html">
+                    <img src="assets/logo-alfath-merah.png" alt="Logo LDK Al-Fath Telkom University" width="150">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="artikel.html">Artikel Terbaru</a></li>
+                    <li><a href="form-upload.html">Portal Admin</a></li>
+                </ul>
+            </div>
         </nav>
-        <h1>LDK Al-Fath Telkom University</h1>
-        <p>Lembaga Dakwah Kampus Universitas Telkom Bandung</p>
+        <div class="hero">
+            <div class="hero-inner">
+                <h1>LDK Al-Fath Telkom University</h1>
+                <p>Lembaga Dakwah Kampus Universitas Telkom Bandung</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#profil">Kenali Kami</a>
+                    <a class="btn btn-outline" href="#artikel">Lihat Artikel</a>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section>
+    <main class="container">
+        <section class="profile" id="profil">
+            <span class="section-label">Tentang Kami</span>
             <h2>Profil UKM LDK Al-Fath</h2>
             <p>LDK Al-Fath adalah Unit Kegiatan Mahasiswa yang bergerak dalam bidang syiar Islam dan pengembangan karakter mahasiswa Muslim di Telkom University.</p>
         </section>
 
-        <section>
+        <section class="articles" id="artikel">
+            <span class="section-label">Kabar Terkini</span>
             <h2>Daftar Artikel & Berita Kegiatan</h2>
-            <article>
-                <header>
-                    <h3>Kajian Rutin Pekanan Mahasiswa</h3>
-                    <p>Dipublikasikan pada: <time datetime="2026-10-01">1 Oktober 2026</time></p>
-                </header>
-                <img src="https://via.placeholder.com/300x150" alt="Foto kegiatan Kajian Rutin LDK Al-Fath">
-                <p>Kajian rutin pekanan membahas pengembangan kepemimpinan Islam bagi mahasiswa kampus...</p>
-                <a href="detail-artikel.html">Baca Selengkapnya</a>
-            </article>
+            <p class="section-desc">Ikuti kajian, kegiatan, dan syiar kampus terbaru dari LDK Al-Fath.</p>
+            <div class="article-grid">
+                <article class="card">
+                    <img class="card-image" src="https://via.placeholder.com/300x150" alt="Foto kegiatan Kajian Rutin LDK Al-Fath">
+                    <div class="card-body">
+                        <span class="card-category">Kajian Rutin</span>
+                        <h3>Kajian Rutin Pekanan Mahasiswa</h3>
+                        <p class="card-meta">Dipublikasikan pada: <time datetime="2026-10-01">1 Oktober 2026</time></p>
+                        <p class="card-text">Kajian rutin pekanan membahas pengembangan kepemimpinan Islam bagi mahasiswa kampus...</p>
+                        <a class="card-link" href="artikel.html">Baca Selengkapnya &rarr;</a>
+                    </div>
+                </article>
+                <article class="card">
+                    <img class="card-image" src="https://via.placeholder.com/300x150" alt="Foto kegiatan LDK Al-Fath Telkom University">
+                    <div class="card-body">
+                        <span class="card-category">Berita Kegiatan</span>
+                        <h3>Syiar Kampus & Pembinaan Karakter Muslim</h3>
+                        <p class="card-meta">Dipublikasikan pada: <time datetime="2026-10-01">1 Oktober 2026</time></p>
+                        <p class="card-text">Rangkaian pembinaan karakter dan ukhuwah Islamiyah untuk mahasiswa Telkom University...</p>
+                        <a class="card-link" href="artikel.html">Baca Selengkapnya &rarr;</a>
+                    </div>
+                </article>
+                <article class="card">
+                    <img class="card-image" src="https://via.placeholder.com/300x150" alt="Foto dakwah kampus LDK Al-Fath">
+                    <div class="card-body">
+                        <span class="card-category">Opini & Edukasi</span>
+                        <h3>Kepemimpinan Islam bagi Generasi Muda</h3>
+                        <p class="card-meta">Dipublikasikan pada: <time datetime="2026-10-01">1 Oktober 2026</time></p>
+                        <p class="card-text">Membangun jiwa pemimpin yang amanah, berilmu, dan berakhlak mulia di lingkungan kampus...</p>
+                        <a class="card-link" href="artikel.html">Baca Selengkapnya &rarr;</a>
+                    </div>
+                </article>
+            </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="site-footer">
+        <img src="assets/logo-alfath-putih.png" alt="Logo LDK Al-Fath putih">
+        <div class="footer-line"></div>
         <p>&copy; 2026 UKM LDK Al-Fath Telkom University. All rights reserved.</p>
     </footer>
 

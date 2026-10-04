@@ -1,0 +1,89 @@
+/* ============================================
+   File    : style/form-upload.css
+   Untuk   : form-upload.html (Panel Admin LDK Al-Fath)
+   Tema    : Merah-Putih Islami (konsisten dgn style.css)
+   Teknik  : Pure CSS, Mobile-First
+   ============================================ */
+
+:root {
+  --merah: #A31621;
+  --marun: #6A0F16;
+  --merah-terang: #C81E2B;
+  --putih: #FFFFFF;
+  --krem: #F6F4F0;
+  --abu-teks: #4A4A4A;
+  --hitam: #1F1B1B;
+  --garis: #E8E0D8;
+  --radius: 12px;
+  --shadow: 0 4px 16px rgba(106, 15, 22, 0.10);
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--krem); color: var(--abu-teks); line-height: 1.7; font-size: 16px; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* Navbar. Base (HP): vertikal. @media 640px: horizontal. */
+.site-header { background: var(--putih); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.07); border-top: 4px solid var(--merah); }
+.navbar { max-width: 1100px; margin: 0 auto; padding: .7rem 1.25rem; }
+.nav-container { display: flex; flex-direction: column; align-items: stretch; gap: 1rem; }
+.brand { text-align: center; }
+.brand img { width: 130px; margin: 0 auto; }
+.nav-links { display: flex; flex-direction: column; width: 100%; gap: .5rem; }
+.nav-links a { display: block; text-align: center; padding: .5rem 1rem; border-radius: 999px; font-weight: 600; font-size: .95rem; color: var(--hitam); transition: background-color .2s, color .2s; }
+.nav-links a:hover, .nav-links a.active { background: var(--merah); color: var(--putih); }
+
+/* Page hero */
+.page-hero { background: linear-gradient(135deg, var(--marun), var(--merah) 60%, var(--merah-terang)); color: var(--putih); text-align: center; padding: 2.5rem 1.25rem 2rem; }
+.page-hero h1 { font-size: 1.8rem; font-weight: 800; }
+.page-hero p { opacity: .92; font-size: .98rem; }
+.hero-badge { display: inline-block; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.35); padding: .3rem 1rem; border-radius: 999px; font-size: .82rem; font-weight: 600; margin-bottom: .8rem; }
+
+/* Layout admin */
+.container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.25rem; display: flex; flex-direction: column; gap: 1.75rem; }
+.panel { background: var(--putih); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--garis); padding: 1.75rem 1.5rem; }
+.panel-header { margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 2px solid var(--krem); }
+.section-label { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--merah); margin-bottom: .3rem; }
+.panel h2 { color: var(--hitam); font-size: 1.4rem; }
+
+/* Form */
+.form-group { margin-bottom: 1.1rem; }
+.form-group label { display: block; font-weight: 700; color: var(--hitam); font-size: .92rem; margin-bottom: .4rem; }
+.form-group input[type="text"], .form-group select, .form-group textarea { width: 100%; padding: .7rem .9rem; border: 2px solid var(--garis); border-radius: 8px; font-family: inherit; font-size: .95rem; color: var(--hitam); background: #FFFEFD; transition: border-color .2s, box-shadow .2s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--merah); box-shadow: 0 0 0 3px rgba(163,22,33,.12); }
+.form-group textarea { resize: vertical; min-height: 140px; }
+.form-group input[type="file"] { width: 100%; padding: .6rem; border: 2px dashed var(--garis); border-radius: 8px; background: var(--krem); font-size: .9rem; cursor: pointer; }
+.btn-submit { display: inline-block; background: var(--merah); color: var(--putih); border: none; padding: .75rem 2rem; border-radius: 999px; font-weight: 700; font-size: .95rem; cursor: pointer; transition: background-color .2s, transform .15s; font-family: inherit; }
+.btn-submit:hover { background: var(--marun); transform: translateY(-1px); }
+
+/* Tabel */
+.table-wrapper { overflow-x: auto; border-radius: 8px; border: 1px solid var(--garis); }
+table.data-table { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 560px; }
+.data-table thead th { background: var(--marun); color: var(--putih); padding: .75rem .9rem; text-align: left; font-size: .85rem; letter-spacing: .4px; }
+.data-table tbody td { padding: .7rem .9rem; border-bottom: 1px solid var(--garis); }
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:nth-child(even) { background: #FBF9F6; }
+.data-table tbody tr:hover { background: #FBE9EB; }
+.badge { display: inline-block; background: #FBE9EB; color: var(--merah); font-size: .78rem; font-weight: 700; padding: .2rem .7rem; border-radius: 999px; }
+.action-edit { color: var(--merah); font-weight: 700; }
+.action-edit:hover { text-decoration: underline; }
+.action-delete { color: #8A8A8A; font-weight: 700; }
+.action-delete:hover { color: var(--marun); text-decoration: underline; }
+
+/* Footer */
+.site-footer { background: var(--marun); color: #F3D9DC; text-align: center; padding: 2rem 1.25rem 1.5rem; margin-top: 1rem; }
+.site-footer p { font-size: .9rem; }
+.footer-line { width: 60px; height: 3px; background: var(--merah-terang); border-radius: 999px; margin: .9rem auto; }
+
+@media (min-width: 640px) {
+  /* Navigasi: vertikal (HP) -> horizontal (tablet ke atas) */
+  .nav-container { flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .brand { text-align: left; }
+  .nav-links { flex-direction: row; width: auto; flex-wrap: wrap; }
+  .page-hero h1 { font-size: 2.2rem; }
+  .panel { padding: 2.25rem 2.5rem; }
+  .brand img { width: 150px; }
+  .container { padding: 2.5rem 1.25rem; }
+}
