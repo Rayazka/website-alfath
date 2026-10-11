@@ -58,4 +58,21 @@ Uji responsif (minimal 2 ukuran, kami uji 3):
 - 1280px desktop: 4 kolom kartu, sidebar permanen.
 
 Cara jalankan: buka file `.html` langsung di browser atau `npx serve .`.
-Screenshot progress W4 simpan di `assets/progress/` (mis. `w4_dashboard.png`, `w4_data.png`, dsb).
+
+**1. Beranda (`index.html`) — Tailwind**
+
+| Desktop                                         | Mobile (responsive)                           |
+| ----------------------------------------------- | --------------------------------------------- |
+| ![W4 Beranda Desktop](assets/progress/w4_1b.png) | ![W4 Beranda Mobile](assets/progress/w4_1.png) |
+
+**2. Data Artikel (`data.html`) — Tailwind + Sidebar**
+
+| Desktop                                       | Mobile (responsive)                         |
+| --------------------------------------------- | ------------------------------------------- |
+| ![W4 Data Desktop](assets/progress/w4_2b.png) | ![W4 Data Mobile](assets/progress/w4_2.png) |
+
+**3. Login (`login.html`) — Tailwind**
+
+| Desktop                                     |
+| ------------------------------------------- |
+| ![W4 Login](assets/progress/w4_3.png) |
