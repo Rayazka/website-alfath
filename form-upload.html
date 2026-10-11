@@ -3,93 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Upload Artikel LDK Al-Fath</title>
-    <link rel="stylesheet" href="style/form-upload.css">
+    <title>Tambah Artikel - Admin LDK Al-Fath</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { alfath: { maroon: '#9B1C1C', maroonDark: '#7F1D1D', cream: '#FFF7F5' } } } } }
+    </script>
 </head>
-<body>
-
-    <header class="site-header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <a class="brand" href="index.html">
-                    <img src="assets/logo-alfath-merah.png" alt="Logo LDK Al-Fath Telkom University" width="150">
-                </a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Ke Beranda Client</a></li>
-                    <li><a href="form-upload.html" class="active">Upload Artikel</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div class="page-hero">
-            <h1>Panel Admin - LDK Al-Fath</h1>
-            <p>Kelola artikel & berita kegiatan kampus</p>
+<body class="bg-gray-100 text-gray-800 antialiased">
+<div class="min-h-screen lg:flex">
+    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 z-30 lg:hidden"></div>
+    <aside id="sidebar" class="fixed lg:static z-40 w-64 h-screen bg-gray-900 text-gray-200 flex flex-col -translate-x-full lg:translate-x-0 transition-transform duration-200">
+        <div class="p-5 flex items-center gap-2 border-b border-white/10">
+            <img src="assets/logo-alfath-putih.png" alt="Logo" class="h-9 w-auto"><span class="font-bold text-sm">Admin Al-Fath</span>
         </div>
-    </header>
+        <nav class="flex-1 p-4 space-y-1 text-sm">
+            <a href="dashboard.html" class="block px-3 py-2.5 rounded-lg hover:bg-white/10">Dashboard</a>
+            <a href="data.html" class="block px-3 py-2.5 rounded-lg hover:bg-white/10">Data Artikel</a>
+            <a href="form-upload.html" class="block px-3 py-2.5 rounded-lg bg-alfath-maroon text-white font-semibold">Tambah Artikel</a>
+            <a href="index.html" class="block px-3 py-2.5 rounded-lg hover:bg-white/10">Lihat Situs →</a>
+        </nav>
+        <div class="p-4 border-t border-white/10 text-sm"><a href="login.html" class="block text-center px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20">Keluar</a></div>
+    </aside>
 
-    <main class="container">
-        <section class="panel">
-            <div class="panel-header">
-                <span class="section-label">Konten Baru</span>
-                <h2>Form Tambah Artikel Baru</h2>
-            </div>
-            <form action="#" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="judul">Judul Artikel:</label>
-                    <input type="text" id="judul" name="judul" placeholder="Contoh: Kajian Rutin Pekanan Mahasiswa" required>
+    <div class="flex-1 min-w-0">
+        <header class="sticky top-0 z-20 bg-white shadow px-4 sm:px-6 py-3 flex items-center gap-3">
+            <button id="sidebar-toggle" class="lg:hidden p-2 border rounded-lg" aria-label="Buka sidebar">☰</button>
+            <div><h1 class="font-bold text-lg">Tambah Artikel Baru</h1><p class="text-xs text-gray-500">Form tambah data (UI saja, belum backend)</p></div>
+        </header>
+
+        <main class="p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto">
+            <form action="#" method="post" enctype="multipart/form-data" class="bg-white rounded-xl shadow p-6 md:p-8 space-y-5">
+                <div>
+                    <label for="judul" class="block text-sm font-medium mb-1">Judul Artikel</label>
+                    <input type="text" id="judul" name="judul" required placeholder="Contoh: Kajian Rutin Pekanan Mahasiswa" class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon focus:border-alfath-maroon">
                 </div>
-                <div class="form-group">
-                    <label for="kategori">Kategori Artikel:</label>
-                    <select id="kategori" name="kategori" required>
-                        <option value="">-- Pilih Kategori --</option>
-                        <option value="kajian">Kajian Islam</option>
-                        <option value="kegiatan">Berita Kegiatan</option>
-                        <option value="opini">Opini & Edukasi</option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label for="kategori" class="block text-sm font-medium mb-1">Kategori Artikel</label>
+                        <select id="kategori" name="kategori" required class="w-full border rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-alfath-maroon">
+                            <option value="">-- Pilih Kategori --</option>
+                            <option value="kajian">Kajian Islam</option>
+                            <option value="kegiatan">Berita Kegiatan</option>
+                            <option value="opini">Opini & Edukasi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="tanggal" class="block text-sm font-medium mb-1">Tanggal Terbit</label>
+                        <input type="date" id="tanggal" name="tanggal" class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="gambar">Upload Gambar Sampul:</label>
-                    <input type="file" id="gambar" name="gambar" accept="image/*" required>
+                <div>
+                    <label for="gambar" class="block text-sm font-medium mb-1">Upload Gambar Sampul</label>
+                    <input type="file" id="gambar" name="gambar" accept="image/*" required class="w-full text-sm border rounded-lg px-3 py-2 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-red-50 file:text-alfath-maroon file:font-semibold">
+                    <p class="text-xs text-gray-500 mt-1">PNG/JPG maks 2MB (validasi backend menyusul).</p>
                 </div>
-                <div class="form-group">
-                    <label for="isi">Isi Artikel:</label>
-                    <textarea id="isi" name="isi" rows="8" cols="50" placeholder="Tulis isi artikel di sini..." required></textarea>
+                <div>
+                    <label for="isi" class="block text-sm font-medium mb-1">Isi Artikel</label>
+                    <textarea id="isi" name="isi" rows="6" required placeholder="Tulis isi artikel di sini..." class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon"></textarea>
                 </div>
-                <button class="btn-submit" type="submit">Upload Artikel</button>
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button type="submit" class="flex-1 bg-alfath-maroon text-white font-semibold rounded-lg py-2.5 hover:bg-alfath-maroonDark">Upload Artikel</button>
+                    <a href="data.html" class="flex-1 text-center border rounded-lg py-2.5 font-semibold hover:bg-gray-50">Batal / Lihat Data</a>
+                </div>
             </form>
-        </section>
-
-        <section class="panel">
-            <div class="panel-header">
-                <span class="section-label">Kelola Data</span>
-                <h2>Daftar Artikel Terdaftar (Kelola Data)</h2>
-            </div>
-            <div class="table-wrapper">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Judul</th>
-                            <th>Kategori</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Kajian Rutin Pekanan Mahasiswa</td>
-                            <td><span class="badge">Kajian</span></td>
-                            <td><a class="action-edit" href="#">Edit</a> | <a class="action-delete" href="#">Hapus</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-line"></div>
-        <p>&copy; 2026 Admin Panel LDK Al-Fath Telkom University.</p>
-    </footer>
-
+        </main>
+    </div>
+</div>
+<script>
+    const sb = document.getElementById('sidebar'), ov = document.getElementById('sidebar-overlay');
+    document.getElementById('sidebar-toggle').addEventListener('click', () => { sb.classList.remove('-translate-x-full'); ov.classList.remove('hidden'); });
+    ov.addEventListener('click', () => { sb.classList.add('-translate-x-full'); ov.classList.add('hidden'); });
+</script>
 </body>
 </html>
