@@ -1,9 +1,17 @@
 <!DOCTYPE html>
+<!--
+ @file form-upload.html
+ @brief Display the validated client-side article submission form.
+ @author ray
+ @created 2026-10-18
+ @todo none
+-->
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Artikel - Admin LDK Al-Fath</title>
+    <link rel="stylesheet" href="style/w5.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { theme: { extend: { colors: { alfath: { maroon: '#9B1C1C', maroonDark: '#7F1D1D', cream: '#FFF7F5' } } } } }
@@ -25,54 +33,63 @@
         <div class="p-4 border-t border-white/10 text-sm"><a href="login.html" class="block text-center px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20">Keluar</a></div>
     </aside>
 
-    <div class="flex-1 min-w-0">
+    <div id="admin-content" class="flex-1 min-w-0">
         <header class="sticky top-0 z-20 bg-white shadow px-4 sm:px-6 py-3 flex items-center gap-3">
-            <button id="sidebar-toggle" class="lg:hidden p-2 border rounded-lg" aria-label="Buka sidebar">☰</button>
-            <div><h1 class="font-bold text-lg">Tambah Artikel Baru</h1><p class="text-xs text-gray-500">Form tambah data (UI saja, belum backend)</p></div>
+            <button id="sidebar-toggle" class="lg:hidden p-2 border rounded-lg" aria-label="Buka sidebar" aria-controls="sidebar" aria-expanded="false">☰</button>
+            <div><h1 class="font-bold text-lg">Tambah Artikel Baru</h1><p class="text-xs text-gray-500">Simulasi publikasi artikel · data lokal browser</p></div>
         </header>
 
         <main class="p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto">
-            <form action="#" method="post" enctype="multipart/form-data" class="bg-white rounded-xl shadow p-6 md:p-8 space-y-5">
+            <p id="storage-status" class="mb-4 text-sm text-gray-500">Data demo lokal · tanpa backend</p>
+            <div id="storage-warning" role="alert" class="mb-4 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900" style="display:none"></div>
+            <div id="notification" role="status" aria-live="polite" class="mb-4 rounded-lg border p-4 text-sm" style="display:none"></div>
+            <div id="form-success" class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900" style="display:none"><a href="data.html" class="font-semibold underline underline-offset-4">Lihat artikel yang ditambahkan →</a></div>
+            <form id="article-form" action="#" method="post" enctype="multipart/form-data" novalidate class="bg-white rounded-xl shadow p-6 md:p-8 space-y-5">
+                <p class="text-xs text-gray-500">Semua field wajib diisi. Artikel baru berstatus Terbit. Gambar hanya divalidasi; berkas tidak diunggah ke server.</p>
                 <div>
                     <label for="judul" class="block text-sm font-medium mb-1">Judul Artikel</label>
-                    <input type="text" id="judul" name="judul" required placeholder="Contoh: Kajian Rutin Pekanan Mahasiswa" class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon focus:border-alfath-maroon">
+                    <input type="text" id="judul" name="judul" required aria-describedby="error-judul" placeholder="Contoh: Kajian Rutin Pekanan Mahasiswa" class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon focus:border-alfath-maroon">
+                    <p id="error-judul" class="field-error"></p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
                         <label for="kategori" class="block text-sm font-medium mb-1">Kategori Artikel</label>
-                        <select id="kategori" name="kategori" required class="w-full border rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-alfath-maroon">
+                        <select id="kategori" name="kategori" required aria-describedby="error-kategori" class="w-full border rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-alfath-maroon">
                             <option value="">-- Pilih Kategori --</option>
                             <option value="kajian">Kajian Islam</option>
                             <option value="kegiatan">Berita Kegiatan</option>
                             <option value="opini">Opini & Edukasi</option>
                         </select>
+                        <p id="error-kategori" class="field-error"></p>
                     </div>
                     <div>
                         <label for="tanggal" class="block text-sm font-medium mb-1">Tanggal Terbit</label>
-                        <input type="date" id="tanggal" name="tanggal" class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon">
+                        <input type="date" id="tanggal" name="tanggal" required aria-describedby="error-tanggal" class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon">
+                        <p id="error-tanggal" class="field-error"></p>
                     </div>
                 </div>
                 <div>
                     <label for="gambar" class="block text-sm font-medium mb-1">Upload Gambar Sampul</label>
-                    <input type="file" id="gambar" name="gambar" accept="image/*" required class="w-full text-sm border rounded-lg px-3 py-2 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-red-50 file:text-alfath-maroon file:font-semibold">
-                    <p class="text-xs text-gray-500 mt-1">PNG/JPG maks 2MB (validasi backend menyusul).</p>
+                    <input type="file" id="gambar" name="gambar" accept="image/png,image/jpeg,.png,.jpg,.jpeg" required aria-describedby="image-help error-gambar" class="w-full text-sm border rounded-lg px-3 py-2 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-red-50 file:text-alfath-maroon file:font-semibold">
+                    <p id="image-help" class="text-xs text-gray-500 mt-1">PNG/JPG maks 2 MB. Hanya nama file disimpan sebagai metadata, bukan isi gambarnya.</p>
+                    <p id="error-gambar" class="field-error"></p>
                 </div>
                 <div>
                     <label for="isi" class="block text-sm font-medium mb-1">Isi Artikel</label>
-                    <textarea id="isi" name="isi" rows="6" required placeholder="Tulis isi artikel di sini..." class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon"></textarea>
+                    <textarea id="isi" name="isi" rows="6" required aria-describedby="error-isi" placeholder="Tulis isi artikel di sini..." class="w-full border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon"></textarea>
+                    <p id="error-isi" class="field-error"></p>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                    <button type="submit" class="flex-1 bg-alfath-maroon text-white font-semibold rounded-lg py-2.5 hover:bg-alfath-maroonDark">Upload Artikel</button>
+                    <button type="submit" class="flex-1 bg-alfath-maroon text-white font-semibold rounded-lg py-2.5 hover:bg-alfath-maroonDark">Simpan Artikel</button>
                     <a href="data.html" class="flex-1 text-center border rounded-lg py-2.5 font-semibold hover:bg-gray-50">Batal / Lihat Data</a>
                 </div>
             </form>
         </main>
     </div>
 </div>
-<script>
-    const sb = document.getElementById('sidebar'), ov = document.getElementById('sidebar-overlay');
-    document.getElementById('sidebar-toggle').addEventListener('click', () => { sb.classList.remove('-translate-x-full'); ov.classList.remove('hidden'); });
-    ov.addEventListener('click', () => { sb.classList.add('-translate-x-full'); ov.classList.add('hidden'); });
-</script>
+<noscript><p class="p-4 text-red-800">Aktifkan JavaScript untuk menyimpan artikel.</p></noscript>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="article-data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

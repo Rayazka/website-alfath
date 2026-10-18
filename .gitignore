@@ -1,0 +1,3 @@
+# Log dan snapshot sementara dari verifikasi browser.
+.playwright-mcp/
+node_modules/

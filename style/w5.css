@@ -1,0 +1,59 @@
+/* State interaksi W5 melengkapi tampilan Tailwind W4. */
+:focus-visible {
+    outline: 2px solid #9b1c1c;
+    outline-offset: 3px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.field-error {
+    color: #b91c1c;
+    font-size: 0.75rem;
+    margin-top: 0.375rem;
+}
+
+.field-error:empty {
+    display: none;
+}
+
+[aria-invalid="true"] {
+    border-color: #b91c1c;
+}
+
+.article-content {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+#detail-title {
+    scroll-margin-top: 6rem;
+}
+
+.article-title {
+    min-width: 12rem;
+    max-width: 26rem;
+    overflow-wrap: anywhere;
+}
+
+.notice-success {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+    color: #065f46;
+}
+
+.notice-error {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #991b1b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0s !important;
+        animation-duration: 0s !important;
+    }
+}

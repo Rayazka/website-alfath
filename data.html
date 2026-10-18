@@ -1,9 +1,17 @@
 <!DOCTYPE html>
+<!--
+ @file data.html
+ @brief Render the Al-Fath article management interface.
+ @author ray
+ @created 2026-10-18
+ @todo none
+-->
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Artikel - Admin LDK Al-Fath</title>
+    <link rel="stylesheet" href="style/w5.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { theme: { extend: { colors: { alfath: { maroon: '#9B1C1C', maroonDark: '#7F1D1D', cream: '#FFF7F5' } } } } }
@@ -25,44 +33,55 @@
         <div class="p-4 border-t border-white/10 text-sm"><a href="login.html" class="block text-center px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20">Keluar</a></div>
     </aside>
 
-    <div class="flex-1 min-w-0">
+    <div id="admin-content" class="flex-1 min-w-0">
         <header class="sticky top-0 z-20 bg-white shadow px-4 sm:px-6 py-3 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <button id="sidebar-toggle" class="lg:hidden p-2 border rounded-lg" aria-label="Buka sidebar">☰</button>
+                <button id="sidebar-toggle" class="lg:hidden p-2 border rounded-lg" aria-label="Buka sidebar" aria-controls="sidebar" aria-expanded="false">☰</button>
                 <div><h1 class="font-bold text-lg">Data Artikel</h1><p class="text-xs text-gray-500">Kelola daftar artikel terdaftar</p></div>
             </div>
             <a href="form-upload.html" class="bg-alfath-maroon text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-alfath-maroonDark">+ Tambah</a>
         </header>
 
         <main class="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+            <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <p id="storage-status" class="text-sm text-gray-500">Data demo lokal · tanpa backend</p>
+                <button id="reset-data" type="button" class="text-sm text-alfath-maroon font-semibold underline underline-offset-4">Reset Data Demo</button>
+            </div>
+            <div id="storage-warning" role="alert" class="mb-4 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900" style="display:none"></div>
+            <div id="notification" role="status" aria-live="polite" class="mb-4 rounded-lg border p-4 text-sm" style="display:none"></div>
             <div class="bg-white rounded-xl shadow">
                 <!-- Toolbar: stack di mobile, row di desktop -->
                 <div class="p-5 flex flex-col md:flex-row md:items-center gap-3 border-b">
-                    <input type="search" placeholder="Cari judul..." class="w-full md:w-64 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon">
-                    <select class="w-full md:w-48 border rounded-lg px-3 py-2 text-sm">
-                        <option>Semua Kategori</option><option>Kajian Islam</option><option>Berita Kegiatan</option><option>Opini & Edukasi</option>
+                    <label for="article-search" class="sr-only">Cari judul artikel</label>
+                    <input id="article-search" type="search" placeholder="Cari judul..." class="w-full md:w-64 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-alfath-maroon">
+                    <label for="category-filter" class="sr-only">Filter kategori</label>
+                    <select id="category-filter" class="w-full md:w-48 border rounded-lg px-3 py-2 text-sm">
+                        <option value="">Semua Kategori</option><option value="kajian">Kajian Islam</option><option value="kegiatan">Berita Kegiatan</option><option value="opini">Opini &amp; Edukasi</option>
                     </select>
-                    <span class="text-xs text-gray-500 md:ml-auto">Menampilkan 5 dari 24 data (dummy)</span>
+                    <span id="result-count" role="status" class="text-xs text-gray-500 md:ml-auto"></span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm min-w-[640px]">
                         <thead class="bg-gray-50 text-gray-500 uppercase text-xs">
-                            <tr><th class="text-left px-5 py-3">ID</th><th class="text-left px-5 py-3">Judul</th><th class="text-left px-5 py-3">Kategori</th><th class="text-left px-5 py-3">Tanggal</th><th class="text-left px-5 py-3">Aksi</th></tr>
+                            <tr><th scope="col" class="text-left px-5 py-3">ID</th><th scope="col" class="text-left px-5 py-3">Judul</th><th scope="col" class="text-left px-5 py-3">Kategori</th><th scope="col" class="text-left px-5 py-3">Tanggal</th><th scope="col" class="text-left px-5 py-3">Status</th><th scope="col" class="text-left px-5 py-3">Aksi</th></tr>
                         </thead>
-                        <tbody class="divide-y">
-                            <tr class="hover:bg-gray-50"><td class="px-5 py-3">1</td><td class="px-5 py-3 font-medium">Kajian Rutin Pekanan Mahasiswa</td><td class="px-5 py-3"><span class="bg-red-100 text-alfath-maroon px-2 py-1 rounded-full text-xs font-semibold">Kajian</span></td><td class="px-5 py-3 text-gray-500">01 Okt 2026</td><td class="px-5 py-3"><a href="#" class="text-sky-700 font-semibold">Edit</a> <span class="text-gray-300">|</span> <a href="#" class="text-red-700 font-semibold">Hapus</a></td></tr>
-                            <tr class="hover:bg-gray-50"><td class="px-5 py-3">2</td><td class="px-5 py-3 font-medium">Syiar Kampus & Pembinaan Karakter</td><td class="px-5 py-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-xs font-semibold">Kegiatan</span></td><td class="px-5 py-3 text-gray-500">28 Sep 2026</td><td class="px-5 py-3"><a href="#" class="text-sky-700 font-semibold">Edit</a> <span class="text-gray-300">|</span> <a href="#" class="text-red-700 font-semibold">Hapus</a></td></tr>
-                            <tr class="hover:bg-gray-50"><td class="px-5 py-3">3</td><td class="px-5 py-3 font-medium">Kepemimpinan Islam Generasi Muda</td><td class="px-5 py-3"><span class="bg-sky-100 text-sky-800 px-2 py-1 rounded-full text-xs font-semibold">Opini</span></td><td class="px-5 py-3 text-gray-500">20 Sep 2026</td><td class="px-5 py-3"><a href="#" class="text-sky-700 font-semibold">Edit</a> <span class="text-gray-300">|</span> <a href="#" class="text-red-700 font-semibold">Hapus</a></td></tr>
-                            <tr class="hover:bg-gray-50"><td class="px-5 py-3">4</td><td class="px-5 py-3 font-medium">Mabit Akbar Muslim Tel-U (Draft)</td><td class="px-5 py-3"><span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs font-semibold">Draft</span></td><td class="px-5 py-3 text-gray-500">15 Sep 2026</td><td class="px-5 py-3"><a href="#" class="text-sky-700 font-semibold">Edit</a> <span class="text-gray-300">|</span> <a href="#" class="text-red-700 font-semibold">Hapus</a></td></tr>
-                            <tr class="hover:bg-gray-50"><td class="px-5 py-3">5</td><td class="px-5 py-3 font-medium">Tabligh Akbar Menyambut Ramadhan</td><td class="px-5 py-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-xs font-semibold">Kegiatan</span></td><td class="px-5 py-3 text-gray-500">10 Sep 2026</td><td class="px-5 py-3"><a href="#" class="text-sky-700 font-semibold">Edit</a> <span class="text-gray-300">|</span> <a href="#" class="text-red-700 font-semibold">Hapus</a></td></tr>
-                        </tbody>
+                        <tbody id="article-table-body" class="divide-y"></tbody>
                     </table>
                 </div>
                 <div class="p-4 flex items-center justify-between text-sm border-t">
-                    <span class="text-gray-500">Halaman 1 dari 5</span>
-                    <div class="flex gap-2"><button class="px-3 py-1.5 border rounded-lg">‹ Prev</button><button class="px-3 py-1.5 rounded-lg bg-alfath-maroon text-white">1</button><button class="px-3 py-1.5 border rounded-lg">2</button><button class="px-3 py-1.5 border rounded-lg">Next ›</button></div>
+                    <span id="page-info" class="text-gray-500"></span>
+                    <div class="flex gap-2"><button id="prev-page" type="button" class="px-3 py-1.5 border rounded-lg" aria-label="Halaman sebelumnya">‹ Prev</button><button id="next-page" type="button" class="px-3 py-1.5 border rounded-lg" aria-label="Halaman berikutnya">Next ›</button></div>
                 </div>
             </div>
+            <section id="article-detail" aria-labelledby="detail-title" class="mt-5 bg-white rounded-xl shadow border-t-4 border-alfath-maroon p-5 sm:p-6" style="display:none">
+                <div class="flex items-start justify-between gap-4">
+                    <div><p class="text-xs font-semibold uppercase tracking-wider text-alfath-maroon mb-2">Detail Artikel</p><h2 id="detail-title" tabindex="-1" class="text-lg font-bold"></h2></div>
+                    <button id="close-detail" type="button" class="text-sm text-gray-500 border rounded-lg px-3 py-1.5" aria-label="Tutup detail artikel">Tutup</button>
+                </div>
+                <p id="detail-meta" class="text-sm text-gray-500 mt-3"></p>
+                <p id="detail-content" class="article-content text-sm leading-7 mt-4"></p>
+                <p id="detail-cover" class="text-xs text-gray-500 border-t mt-5 pt-3"></p>
+            </section>
             <!-- List alternatif untuk mobile kecil -->
             <div class="mt-4 sm:hidden space-y-2 text-sm">
                 <p class="text-gray-500">Tips: geser tabel ke kiri untuk melihat kolom Aksi di layar kecil.</p>
@@ -70,10 +89,9 @@
         </main>
     </div>
 </div>
-<script>
-    const sb = document.getElementById('sidebar'), ov = document.getElementById('sidebar-overlay');
-    document.getElementById('sidebar-toggle').addEventListener('click', () => { sb.classList.remove('-translate-x-full'); ov.classList.remove('hidden'); });
-    ov.addEventListener('click', () => { sb.classList.add('-translate-x-full'); ov.classList.add('hidden'); });
-</script>
+<noscript><p class="p-4 text-red-800">Aktifkan JavaScript untuk mengelola data artikel.</p></noscript>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="article-data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

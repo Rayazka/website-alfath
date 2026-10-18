@@ -1,9 +1,17 @@
 <!DOCTYPE html>
+<!--
+ @file dashboard.html
+ @brief Display article statistics and recent Al-Fath articles.
+ @author ray
+ @created 2026-10-18
+ @todo none
+-->
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - LDK Al-Fath</title>
+    <link rel="stylesheet" href="style/w5.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { theme: { extend: { colors: { alfath: { maroon: '#9B1C1C', maroonDark: '#7F1D1D', cream: '#FFF7F5' } } } } }
@@ -33,11 +41,11 @@
     </aside>
 
     <!-- Konten utama -->
-    <div class="flex-1 min-w-0">
+    <div id="admin-content" class="flex-1 min-w-0">
         <!-- Topbar -->
         <header class="sticky top-0 z-20 bg-white shadow px-4 sm:px-6 py-3 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <button id="sidebar-toggle" class="lg:hidden p-2 border rounded-lg" aria-label="Buka sidebar">☰</button>
+                <button id="sidebar-toggle" class="lg:hidden p-2 border rounded-lg" aria-label="Buka sidebar" aria-controls="sidebar" aria-expanded="false">☰</button>
                 <div><h1 class="font-bold text-lg leading-tight">Dashboard</h1><p class="text-xs text-gray-500">Kelola artikel & kegiatan kampus</p></div>
             </div>
             <div class="flex items-center gap-2 text-sm">
@@ -47,12 +55,15 @@
         </header>
 
         <main class="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+            <p id="storage-status" class="mb-4 text-sm text-gray-500">Data demo lokal · tanpa backend</p>
+            <div id="storage-warning" role="alert" class="mb-4 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900" style="display:none"></div>
+            <div id="notification" role="status" aria-live="polite" class="mb-4 rounded-lg border p-4 text-sm" style="display:none"></div>
             <!-- Grid statistik: 1 / 2 / 4 -->
             <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-alfath-maroon"><p class="text-sm text-gray-500">Total Artikel</p><p class="text-3xl font-bold mt-1">24</p><p class="text-xs text-emerald-600 mt-1">+3 minggu ini</p></div>
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500"><p class="text-sm text-gray-500">Kajian Islam</p><p class="text-3xl font-bold mt-1">10</p></div>
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-emerald-500"><p class="text-sm text-gray-500">Berita Kegiatan</p><p class="text-3xl font-bold mt-1">9</p></div>
-                <div class="bg-white rounded-xl shadow p-5"><p class="text-sm text-gray-500">Draft</p><p class="text-3xl font-bold mt-1">5</p></div>
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-alfath-maroon"><p class="text-sm text-gray-500">Total Artikel</p><p id="stat-total" class="text-3xl font-bold mt-1">—</p><p class="text-xs text-gray-500 mt-1">Termasuk terbit dan draft</p></div>
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500"><p class="text-sm text-gray-500">Kajian Islam</p><p id="stat-kajian" class="text-3xl font-bold mt-1">—</p></div>
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-emerald-500"><p class="text-sm text-gray-500">Berita Kegiatan</p><p id="stat-kegiatan" class="text-3xl font-bold mt-1">—</p></div>
+                <div class="bg-white rounded-xl shadow p-5"><p class="text-sm text-gray-500">Draft</p><p id="stat-draft" class="text-3xl font-bold mt-1">—</p></div>
             </section>
 
             <!-- Grid 2 kolom: tabel ringkas + aktivitas -->
@@ -65,22 +76,15 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm min-w-[520px]">
                             <thead class="bg-gray-50 text-gray-500"><tr><th class="text-left px-5 py-3">Judul</th><th class="text-left px-5 py-3">Kategori</th><th class="text-left px-5 py-3">Tanggal</th></tr></thead>
-                            <tbody class="divide-y">
-                                <tr><td class="px-5 py-3 font-medium">Kajian Rutin Pekanan</td><td class="px-5 py-3"><span class="bg-red-100 text-alfath-maroon px-2 py-1 rounded-full text-xs">Kajian</span></td><td class="px-5 py-3 text-gray-500">01 Okt 2026</td></tr>
-                                <tr><td class="px-5 py-3 font-medium">Syiar Kampus & Pembinaan</td><td class="px-5 py-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-xs">Kegiatan</span></td><td class="px-5 py-3 text-gray-500">28 Sep 2026</td></tr>
-                                <tr><td class="px-5 py-3 font-medium">Kepemimpinan Islam</td><td class="px-5 py-3"><span class="bg-sky-100 text-sky-800 px-2 py-1 rounded-full text-xs">Opini</span></td><td class="px-5 py-3 text-gray-500">20 Sep 2026</td></tr>
-                            </tbody>
+                            <tbody id="recent-articles" class="divide-y"></tbody>
                         </table>
                     </div>
                 </div>
                 <div class="space-y-4">
                     <div class="bg-white rounded-xl shadow p-5">
-                        <h2 class="font-bold">Aktivitas</h2>
-                        <ul class="mt-3 space-y-3 text-sm">
-                            <li class="flex gap-2"><span class="w-2 h-2 mt-1.5 rounded-full bg-emerald-500 shrink-0"></span>Artikel "Kajian Rutin" dipublikasikan</li>
-                            <li class="flex gap-2"><span class="w-2 h-2 mt-1.5 rounded-full bg-amber-500 shrink-0"></span>Draft "Mabit Akbar" menunggu review</li>
-                            <li class="flex gap-2"><span class="w-2 h-2 mt-1.5 rounded-full bg-sky-500 shrink-0"></span>3 komentar baru dimoderasi</li>
-                        </ul>
+                        <h2 class="font-bold">Ringkasan Publikasi</h2>
+                        <p id="publication-summary" class="mt-3 text-sm leading-6 text-gray-600"></p>
+                        <p class="mt-3 text-xs text-gray-500">Dihitung dari data yang sama dengan halaman Data Artikel.</p>
                     </div>
                     <div class="bg-alfath-maroon text-white rounded-xl shadow p-5">
                         <h2 class="font-bold">Aksi Cepat</h2>
@@ -91,12 +95,9 @@
         </main>
     </div>
 </div>
-<script>
-    const sb = document.getElementById('sidebar'), ov = document.getElementById('sidebar-overlay');
-    document.getElementById('sidebar-toggle').addEventListener('click', () => {
-        sb.classList.remove('-translate-x-full'); ov.classList.remove('hidden');
-    });
-    ov.addEventListener('click', () => { sb.classList.add('-translate-x-full'); ov.classList.add('hidden'); });
-</script>
+<noscript><p class="p-4 text-red-800">Aktifkan JavaScript untuk melihat statistik artikel.</p></noscript>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="article-data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
