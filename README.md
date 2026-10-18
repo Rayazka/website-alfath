@@ -171,39 +171,5 @@ dipertahankan saat refresh, bukan otomatis memuat seed lagi.
 Bukti tambahan: [notifikasi sukses form](assets/progress/w5_form_success.png) dan
 [hasil penghapusan artikel](assets/progress/w5_delete.png).
 
-#### Video interaktivitas
-
+#### Video
 **[Tonton/unduh video demo W5 — WebM, ±53 detik](docs/screenshots/w5-demo.webm)**
-
-Rekaman aktual browser beresolusi 1280 × 900, tanpa narasi, memperlihatkan dashboard → pencarian/filter
-→ detail → pagination → validasi → tambah → refresh → statistik berubah → hapus.
-Jika GitHub menampilkan halaman berkas, pilih **View raw/Download**, lalu putar di browser atau pemutar video.
-Saat server lokal berjalan, video juga dapat dibuka di
-http://127.0.0.1:8000/docs/screenshots/w5-demo.webm.
-
-Panduan demo dan opsi unggahan ke Google Drive/YouTube tersedia di **[docs/demo-w5.md](docs/demo-w5.md)**.
-Tautan repository ke video menjadi dapat diakses penguji setelah berkas ini di-commit dan di-push.
-
-#### Verifikasi
-
-Dengan Node.js 18 atau lebih baru:
-
-```bash
-node --test tests/article-data.test.js
-node --check article-data.js
-node --check script.js
-git diff --check
-```
-
-Hasil pengujian implementasi: **10 unit test lulus** dan **51 checkpoint browser lulus**,
-termasuk validasi gambar, data kosong setelah refresh, sinkronisasi antartab, pemulihan storage rusak,
-kegagalan penyimpanan, serta tampilan 375/768/1280 px. Detail: [laporan verifikasi](docs/verification-w5.md).
-
-#### Checklist pengumpulan
-
-- [x] Melanjutkan halaman dan topik W4.
-- [x] Menambahkan JavaScript murni dan jQuery dengan fungsi sesuai studi kasus.
-- [x] Menyertakan screenshot sebelum/sesudah dan video demo dalam repository lokal.
-- [ ] Membuat commit baru dan push ke repository GitHub yang sama.
-- [ ] Memastikan gambar dan tautan video dapat dibuka dari GitHub; bila perlu unggah video ke Drive/YouTube dan cantumkan tautannya di README.
-- [ ] Mengumpulkan tautan repository dengan commit terbaru melalui LMS.
